@@ -15,6 +15,8 @@
 		$kategori = "Dare";
 	}
 
+	mysqli_close($connection);
+
 ?>
 
 <?php require_once getcwd() . '/components/templateHeader.php'; ?>

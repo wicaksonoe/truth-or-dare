@@ -9,6 +9,8 @@
 	while ( $row_data = mysqli_fetch_assoc($query_result) ) {
 		$array_data[] = $row_data;
 	}
+
+	mysqli_close($connection);
 ?>
 
 <?php require_once getcwd().'/components/templateHeader.php'; ?>

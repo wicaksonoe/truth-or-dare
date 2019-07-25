@@ -11,6 +11,9 @@
 	if (!$query_result) {
 		echo "<br>Input data gagal.<br>";
 		echo mysqli_error($connection);
+
+		mysqli_close($connection);
 	} else {
+		mysqli_close($connection);
 		header('Location: ' . $baseURL . '?pages=list');
 	}

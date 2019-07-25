@@ -14,4 +14,6 @@ $query_result = mysqli_query($connection, $query);
 
 $result_data = mysqli_fetch_assoc($query_result);
 
+mysqli_close($connection);
+
 echo json_encode($result_data);
