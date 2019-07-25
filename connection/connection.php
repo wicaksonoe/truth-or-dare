@@ -79,7 +79,7 @@ class DB
 
 	public function getForApi(int $mode)
 	{
-		$query = $this->pdo->prepare("SELECT kategori_permainan, konten_permainan FROM permainan WHERE kategori_permainan = :mode ORDER BY RAND() LIMIT 1");
+		$query = $this->pdo->prepare("SELECT kategori_permainan, konten_permainan FROM permainan WHERE kategori_permainan = :mode ORDER BY RANDOM() LIMIT 1");
 
 		// binding value
 		$query->bindValue(':mode', $mode);
