@@ -1,10 +1,10 @@
 <?php
 //  DELETE THIS IF ON PRODUCTION MODE
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
+// error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
+// ini_set('display_startup_errors', TRUE);
 // +++++++++++++++++++++++++++++++++++++++
-$baseURL = "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
+$baseURL = "https://{$_SERVER['HTTP_HOST']}{$_SERVER['PHP_SELF']}";
 
 if ( isset($_GET['pages']) ) {
 	$pages = $_GET['pages'];
