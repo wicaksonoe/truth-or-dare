@@ -1,16 +1,16 @@
 <?php
 	require_once getcwd().'/connection/connection.php';
 
-	$query = "SELECT * FROM permainan ORDER BY kategori_permainan ASC";
-
-	$query_result = mysqli_query($connection, $query);
-
-	$array_data = [];
-	while ( $row_data = mysqli_fetch_assoc($query_result) ) {
-		$array_data[] = $row_data;
+	try {
+	
+		$conn = new DB();
+		$array_data = $conn->getAll();
+	
+	} catch (\PDOException $e) {
+		echo $e->getMessage();
 	}
 
-	mysqli_close($connection);
+	$conn->close();
 ?>
 
 <?php require_once getcwd().'/components/templateHeader.php'; ?>

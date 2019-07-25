@@ -1,31 +1,24 @@
 <?php
 	require_once getcwd().'/connection/connection.php';
-
 	
 	if ( isset( $_POST['submit'] ) ) {
-		
-		$kategori = mysqli_real_escape_string($connection, $_POST['kategori']);
-		$konten   = mysqli_real_escape_string($connection, $_POST['konten']);
 
 		if ( $kategori != 1 || $kategori != 2 ) {
 			header('Location: '.$baseURL.'?pages=list');
 		}
 
-		$query = "INSERT INTO permainan( kategori_permainan, konten_permainan ) VALUES ( $kategori, '$konten' )";
-
-		$result = mysqli_query($connection, $query);
-
-		// Insert Data Failed.
-		if ( !$result ) {
-			echo "<br>Input data gagal.<br>";
-			echo mysqli_error($connection);
-
-			mysqli_close($connection);
-		} else {
-			mysqli_close($connection);
-			header('Location: '.$baseURL.'?pages=list');
+		try {
+	
+			$conn = new DB();
+			$array_data = $conn->insert( $_POST['kategori'], $_POST['konten'] );
+		
+		} catch (\PDOException $e) {
+			echo $e->getMessage();
 		}
-
+	
+		$conn->close();
+		header('Location: '.$baseURL.'?pages=list');
+		
 	}
 ?>
 
@@ -59,9 +52,5 @@
 </div>
 
 <?php require_once getcwd() . '/components/templateJavaScript.php'; ?>
-
-<script>
-
-</script>
 
 <?php require_once getcwd() . '/components/templateFooter.php'; ?>

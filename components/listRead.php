@@ -1,21 +1,24 @@
 <?php
-	require_once getcwd().'/connection/connection.php';
+	require_once getcwd() . '/connection/connection.php';
 
-	$id = mysqli_real_escape_string($connection, $_GET['id']);
+	try {
+		
+		$conn = new DB();
+		$data = $conn->edit($_GET['id']);
 
-	$query = "SELECT * FROM permainan WHERE id=$id";
+		if ( $data == FALSE ) header('location: '.$baseURL.'?pages=list');
 
-	$query_result = mysqli_query($connection, $query);
+		if ($data->kategori_permainan == 1) {
+			$kategori = "Truth";
+		} else if ($data->kategori_permainan == 2) {
+			$kategori = "Dare";
+		}
 
-	$data = mysqli_fetch_assoc($query_result);
-
-	if ( $data['kategori_permainan'] == 1 ) {
-		$kategori = "Truth";
-	} else if ( $data['kategori_permainan'] == 2 ) { 
-		$kategori = "Dare";
+	} catch (\PDOException $e) {
+		echo $e->getMessage();
 	}
 
-	mysqli_close($connection);
+	$conn->close();
 
 ?>
 
@@ -33,15 +36,15 @@
 						</div>
 						<div class="form-group">
 							<label for="konten">Konten</label>
-							<textarea class="form-control" disabled><?php echo $data['konten_permainan']; ?></textarea>
+							<textarea class="form-control" disabled><?php echo $data->konten_permainan; ?></textarea>
 						</div>
 					</form>
 				</div>
 			</div>
 			<div class="card mt-2">
 				<div class="card-body">
-					<form action="<?php echo $baseURL.'?pages=list&method=update'; ?>" method="post">
-						<input type="text" name="id" id="id" value="<?php echo $data['id']; ?>" hidden>
+					<form action="<?php echo $baseURL . '?pages=list&method=update'; ?>" method="post">
+						<input type="text" name="id" id="id" value="<?php echo $data->id; ?>" hidden>
 						<div class="form-group">
 							<label for="kategori">Kategori</label>
 							<select name="kategori" id="kategori" class="form-control" required>
@@ -52,7 +55,7 @@
 						</div>
 						<div class="form-group">
 							<label for="konten">Konten</label>
-							<textarea type="text" class="form-control" id="konten" name="konten" required></textarea>
+							<textarea type="text" class="form-control" id="konten" name="konten" required><?php echo $data->konten_permainan; ?></textarea>
 						</div>
 
 						<button type="submit" class="btn btn-success col-12">Update</button>
