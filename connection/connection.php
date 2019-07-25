@@ -7,19 +7,19 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 class DB
 {
 
-	private $driver = 'mysql';
-	private $host   = 'localhost';
-	private $port   = '3306';
-	private $dbname = 'truth_or_dare';
-	private $user   = 'phpmyadmin';
-	private $pass   = 'kosongin';
+	// private $driver = 'mysql';
+	// private $host   = 'localhost';
+	// private $port   = '3306';
+	// private $dbname = 'truth_or_dare';
+	// private $user   = 'phpmyadmin';
+	// private $pass   = 'kosongin';
 
-	// private $driver = 'pgsql';
-	// private $host   = '';
-	// private $port   = '';
-	// private $dbname = '';
-	// private $user   = '';
-	// private $pass   = '';
+	private $driver = 'pgsql';
+	private $host   = 'ec2-174-129-227-146.compute-1.amazonaws.com';
+	private $port   = '5432';
+	private $dbname = 'dckedj6lcch3kr';
+	private $user   = 'gyilmwppgedjom';
+	private $pass   = '92fcf0a6f61d94c270a0f31bbc948fc3378f89f6c971534c5ffa46faef58156b';
 
 	protected $pdo	= NULL;
 
